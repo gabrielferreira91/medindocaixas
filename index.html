@@ -16,7 +16,6 @@
 <body>
     <header>
         <h1>Medidor de Caixas</h1>
-        <h2>Facilitando seus cálculos diários</h2>
     </header>
     <main>
         <div class="container">
@@ -68,10 +67,38 @@
                 </div>
             <button class="calcBox" id="calcBox" onclick='getMeasure()'>Calcular Medidas</button>
             <div id="totalBox">
-                <strong id="totalLength">00</strong>x<strong id="totalWidth">00</strong></div>            
-                <p>MEDIDAS DA CHAPA</p>
+                <strong id="totalLength">00</strong><strong>x</strong><strong id="totalWidth">00</strong>
+                <!-- <p>MEDIDAS DA CHAPA</p> -->
+            </div>            
+            
+            <div class="valorCaixas">
+                <div class="valores">
+                    <p>
+                        Gramatura
+                    </p>
+                    <div class="containerInput">
+                        <input id="gramatura" type="number" placeholder="Ex: 400">
+                    </div>
+                </div>
+                <strong> X</strong>
+                <div class="valores">
+                    <p>
+                        Valor do KG
+                    </p>
+                    <div class="containerInput">
+                        <input id="valorKg" type="number" placeholder="Largura">
+                    </div>
+                </div>
+                <div class="valores">
+                    <div class="valorFinal">
+                        <button id="calcValor" class="calcValor disabled" onclick="getValues()" disabled>Calcular Valor</button>
+                    </div>
+                </div>
             </div>
-        </div>
+            <div id="totalValue">
+                <strong id="resultR">R$</strong><strong id="resultValue">0,00</strong>
+            </div>  
+        </div>   
     </main>
 
     <footer>
