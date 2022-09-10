@@ -166,6 +166,7 @@ function setTimes(resultLength, resultWidth) {
 }
 
 function setValue(resultValue) {
+  totalRs.textContent = 'R$ '
   totalValue.textContent = resultValue.toFixed(2)
 }
 
