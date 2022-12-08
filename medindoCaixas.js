@@ -20,6 +20,8 @@ let tipoDeCaixa = document.getElementById('tiposDeCaixa')
 
 let buttonValue = document.getElementById('calcValor')
 
+tipoDeCaixa.addEventListener("change",disableHeightWhenIsTabuleiro)
+
 let resultBox = []
 let isInvalid = false
 let isInvalidValue = false
@@ -35,10 +37,10 @@ function typeOfBox(boxes) {
     isInvalidFunction(heightBox)
   ) {
     isInvalid = true
-    addClass()
+    addClass(buttonValue)
   } else {
     isInvalid = false
-    removeClass()
+    removeClass(buttonValue)
 
     switch (boxes) {
       case 'maleta':
@@ -53,6 +55,10 @@ function typeOfBox(boxes) {
         calcMaletaT30(lengthBox, widthBox, heightBox)
         break
 
+      case 'maletaTInferior':
+        calcMaletaTInferior(lengthBox, widthBox, heightBox)
+        break
+
       case 'env1tampa':
         calcEnv01Tampa(lengthBox, widthBox, heightBox)
         break
@@ -64,6 +70,10 @@ function typeOfBox(boxes) {
       case 'envT030':
         calcEnvTransp30(lengthBox, widthBox, heightBox)
         break
+      
+      case 'tabuleiro':
+        calcTabuleiro(lengthBox, widthBox)
+        break      
     }
   }
 }
@@ -98,6 +108,17 @@ function calcMaletaT30(length, width, height) {
   resultBox = [riscador, impressora]
   return resultBox
 }
+
+function calcMaletaTInferior(length, width, height) {
+  const riscador = (width + transpasseNormal) / 2  +
+  (height + somaAltura) + 
+  width
+  const impressora = length + width + length + width + abaMaleta
+  
+  resultBox = [riscador, impressora]
+  return resultBox
+}
+
 
 function calcEnvNormal(length, width, height) {
   const riscador =
@@ -135,6 +156,14 @@ function calcEnvTransp30(length, width, height) {
     (width + transpasse30) / 2
   const impressora = abaEnvoltorio + height + length + height + abaEnvoltorio
 
+  resultBox = [riscador, impressora]
+  return resultBox
+}
+
+function calcTabuleiro(length, width) {
+  const riscador = length
+  const impressora = width
+  
   resultBox = [riscador, impressora]
   return resultBox
 }
@@ -180,14 +209,14 @@ function msgErrorValue() {
   totalValue.textContent = 'VALOR INVÁLIDO'
 }
 
-function removeClass() {
-  buttonValue.disabled = false
-  buttonValue.classList.remove('disabled')
+function removeClass(nameValue) {
+  nameValue.disabled = false
+  nameValue.classList.remove('disabled')
 }
 
-function addClass() {
-  buttonValue.disabled = true
-  buttonValue.classList.add('disabled')
+function addClass(nameValue) {
+  nameValue.disabled = true
+  nameValue.classList.add('disabled')
 }
 
 // FUNCTION OF BUTTON
@@ -218,4 +247,12 @@ function getValues() {
   }
 
   isInvalidValue ? msgErrorValue() : setValue(valorFinal)
+}
+
+function disableHeightWhenIsTabuleiro(){
+  if (document.getElementById('tiposDeCaixa').value == 'tabuleiro'){     
+    addClass(inputHeightBox)
+  } else {
+    removeClass(inputHeightBox)
+  } 
 }
