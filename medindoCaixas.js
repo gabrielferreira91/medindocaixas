@@ -25,6 +25,16 @@ tipoDeCaixa.addEventListener("change",disableHeightWhenIsTabuleiro)
 let resultBox = []
 let isInvalid = false
 let isInvalidValue = false
+let isTabuleiro = false;
+
+function isHeightValid(heightBox){
+  if(isTabuleiro) {
+    return false
+  }
+  else {
+    return isInvalidFunction(heightBox)
+  }
+}
 
 function typeOfBox(boxes) {
   let lengthBox = parseInt(inputLengthBox.value)
@@ -34,7 +44,7 @@ function typeOfBox(boxes) {
   if (
     isInvalidFunction(lengthBox) ||
     isInvalidFunction(widthBox) ||
-    isInvalidFunction(heightBox)
+    isHeightValid(heightBox)
   ) {
     isInvalid = true
     addClass(buttonValue)
@@ -119,7 +129,6 @@ function calcMaletaTInferior(length, width, height) {
   return resultBox
 }
 
-
 function calcEnvNormal(length, width, height) {
   const riscador =
     (width + transpasseNormal) / 2 +
@@ -167,7 +176,6 @@ function calcTabuleiro(length, width) {
   resultBox = [riscador, impressora]
   return resultBox
 }
-
 
 function isInvalidFunction(valor) {
   if (valor <= 0 || isNaN(valor)) {
@@ -252,7 +260,9 @@ function getValues() {
 function disableHeightWhenIsTabuleiro(){
   if (document.getElementById('tiposDeCaixa').value == 'tabuleiro'){     
     addClass(inputHeightBox)
+    isTabuleiro = true;
   } else {
     removeClass(inputHeightBox)
+    isTabuleiro = false;
   } 
 }
